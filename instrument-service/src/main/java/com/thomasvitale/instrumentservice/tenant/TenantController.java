@@ -12,7 +12,7 @@ public class TenantController {
 
 	@GetMapping
 	String getTenant() {
-		return TenantContext.getTenantId();
+		return "";
 	}
 
 }
