@@ -15,17 +15,17 @@ public class TenantIdentifierResolver implements CurrentTenantIdentifierResolver
 
 	@Override
 	public String resolveCurrentTenantIdentifier() {
-		return Objects.requireNonNullElse(TenantContext.getTenantId(), "PUBLIC");
+		return null;
 	}
 
 	@Override
 	public boolean validateExistingCurrentSessions() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public void customize(Map<String, Object> hibernateProperties) {
-		hibernateProperties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, this);
+
 	}
-  
+
 }

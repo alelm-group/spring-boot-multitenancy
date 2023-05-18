@@ -15,38 +15,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConnectionProvider implements MultiTenantConnectionProvider, HibernatePropertiesCustomizer {
 
-  	private final DataSource dataSource;
-
-	ConnectionProvider(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
 	@Override
 	public Connection getAnyConnection() throws SQLException {
-		return getConnection("PUBLIC");
+		return null;
 	}
 
 	@Override
 	public void releaseAnyConnection(Connection connection) throws SQLException {
-		connection.close();
+
 	}
 
 	@Override
 	public Connection getConnection(String tenantIdentifier) throws SQLException {
-		final Connection connection = dataSource.getConnection();
-		connection.setSchema(tenantIdentifier);
-		return connection;
+		return null;
 	}
 
 	@Override
 	public void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
-    	connection.setSchema("PUBLIC");
-		connection.close();
-  	}
+
+	}
 
 	@Override
 	public boolean supportsAggressiveRelease() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -56,12 +47,12 @@ public class ConnectionProvider implements MultiTenantConnectionProvider, Hibern
 
 	@Override
 	public <T> T unwrap(Class<T> unwrapType) {
-		throw new UnsupportedOperationException("Unimplemented method 'unwrap'.");
+		return null;
 	}
 
 	@Override
 	public void customize(Map<String, Object> hibernateProperties) {
-		hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
+
 	}
-  
+
 }
