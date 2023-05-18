@@ -11,17 +11,4 @@ import org.springframework.security.web.server.authentication.RedirectServerAuth
 @Configuration
 public class SecurityConfig {
 
-	@Bean
-	SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, TenantClientRegistrationRepository clientRegistrationRepository) {
-		return http
-			.authorizeExchange(exchange -> exchange
-				.pathMatchers("/actuator/**", "/tenant-login/**").permitAll()
-				.anyExchange().authenticated())
-			.oauth2Login(oauth2 -> oauth2
-				.clientRegistrationRepository(clientRegistrationRepository))
-			.exceptionHandling(exception ->
-				exception.authenticationEntryPoint(new RedirectServerAuthenticationEntryPoint("/tenant-login")))
-			.build();
-	}
-
 }

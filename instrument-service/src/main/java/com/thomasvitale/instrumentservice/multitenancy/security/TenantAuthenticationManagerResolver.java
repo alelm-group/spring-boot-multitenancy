@@ -17,23 +17,10 @@ import org.springframework.stereotype.Component;
 public class TenantAuthenticationManagerResolver implements AuthenticationManagerResolver<HttpServletRequest> {
 
 	private static final Map<String,AuthenticationManager> authenticationManagers = new ConcurrentHashMap<>();
-	private final TenantSecurityProperties tenantSecurityProperties;
-
-	public TenantAuthenticationManagerResolver(TenantSecurityProperties tenantSecurityProperties) {
-		this.tenantSecurityProperties = tenantSecurityProperties;
-	}
 
 	@Override
 	public AuthenticationManager resolve(HttpServletRequest request) {
-		var tenantId = TenantContext.getTenantId();
-		return authenticationManagers.computeIfAbsent(tenantId, this::buildAuthenticationManager);
-	}
-
-	private AuthenticationManager buildAuthenticationManager(String tenantId) {
-		var issuerBaseUri = tenantSecurityProperties.issuerBaseUri().toString().strip();
-		var issuerUri = issuerBaseUri + tenantId;
-		var jwtAuthenticationprovider = new JwtAuthenticationProvider(JwtDecoders.fromIssuerLocation(issuerUri));
-		return jwtAuthenticationprovider::authenticate;
+		return null;
 	}
 
 }

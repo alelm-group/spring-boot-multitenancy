@@ -18,10 +18,7 @@ public class LoginController {
 	@GetMapping("tenant-login")
 	Mono<Void> login(ServerWebExchange exchange) {
 		return Mono.defer(() -> {
-			var baseLoginUri = "/oauth2/authorization/";
-			var tenantId = exchange.getRequest().getURI().getHost().split("\\.")[0];
-			var redirectUri = URI.create(baseLoginUri + tenantId);
-			return redirectStrategy.sendRedirect(exchange, redirectUri);
+			return null;
 		});
 	}
 

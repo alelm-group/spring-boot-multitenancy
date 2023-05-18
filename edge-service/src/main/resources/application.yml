@@ -7,9 +7,6 @@ spring:
   
   cloud:
     gateway:
-      default-filters:
-        - SaveSession
-        - TokenRelay
       routes:
         - id: instrument-route
           uri: ${INSTRUMENT_SERVICE_URL:http://localhost:8181}
